@@ -5,8 +5,13 @@
         <HomeImage />
       </div>
     </div>
-    <div class="row">
-      <div class="col-12"></div>
+    <div class="row mt-4">
+      <div class="col-md-3 mt-3" v-for="e in events" :key="e.id">
+        <div class="bg-dark lighten-25 p-1 rounded">
+          <EventsCard :event="e"/>
+
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -16,6 +21,9 @@ import HomeImage from '../components/HomeImage.vue';
 import Pop from '../utils/Pop.js';
 import { eventsService } from '../services/EventsService.js';
 import { onMounted } from 'vue';
+import EventsCard from '../components/EventsCard.vue';
+import { computed } from '@vue/reactivity';
+import { AppState } from '../AppState.js';
 export default {
     setup() {
       async function getAllEvents(){
@@ -29,9 +37,11 @@ export default {
       onMounted(()=>{
         getAllEvents()
       })
-        return {};
+        return {
+          events: computed(() => AppState.events)
+        };
     },
-    components: { HomeImage }
+    components: { HomeImage, EventsCard }
 };
 </script>
 
