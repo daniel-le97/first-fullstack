@@ -25,18 +25,18 @@
         </li>
       </ul>
       <!-- LOGIN COMPONENT HERE -->
-      <Login />
+      <!-- <Login /> -->
     </div>
   </nav>
 </template>
 
 <script>
-import Login from './Login.vue'
+// import Login from './Login.vue'
 export default {
   setup() {
     return {}
   },
-  components: { Login }
+  // components: { Login }
 }
 </script>
 

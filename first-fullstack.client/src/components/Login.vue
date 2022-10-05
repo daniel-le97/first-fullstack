@@ -8,7 +8,7 @@
       Login
     </button>
 
-    <div class="dropdown my-2 my-lg-0" v-else>
+    <div class="dropdown my-2 my-lg-0 d-flex flex-column" v-else>
       <div
         class="dropdown-toggle selectable"
         data-bs-toggle="dropdown"

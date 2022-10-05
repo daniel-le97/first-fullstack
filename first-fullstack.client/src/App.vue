@@ -3,29 +3,42 @@
     <Navbar />
   </header>
   <main>
-    <router-view />
-  </main>
-  <footer>
-    <div class="bg-dark text-light text-center p-4">
-      Made with 💖 by CodeWorks
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-10">
+          <router-view  />
+        </div>
+        <div class="col-2 p-0 bg-dark lighten-20 height100 scroll-none">
+          <Login  />
+          <!--  -->
+        </div>
+      </div>
     </div>
-  </footer>
+  </main>
 </template>
 
 <script>
-import { computed } from 'vue'
-import { AppState } from './AppState'
-import Navbar from './components/Navbar.vue'
+import { computed } from "vue";
+import { AppState } from "./AppState";
+import Navbar from "./components/Navbar.vue";
+import Login from "./components/Login.vue";
 
 export default {
   setup() {
     return {
-      appState: computed(() => AppState)
-    }
+      appState: computed(() => AppState),
+    };
   },
-  components: { Navbar }
-}
+  components: { Navbar, Login },
+};
 </script>
 <style lang="scss">
+
 @import "./assets/scss/main.scss";
+
+.height100{
+  min-height: 100vh;
+  position: sticky;
+}
+
 </style>
