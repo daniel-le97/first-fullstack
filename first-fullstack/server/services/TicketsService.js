@@ -11,16 +11,19 @@ class TicketsService {
     const event = await eventsService.getEventById(ticket.eventId);
     const loggedInUserIsOwner = userId == event.creatorId.toString();
     const loggedInUserHasTicket = ticket.accountId.toString() == userId;
-    if (loggedInUserIsOwner && loggedInUserHasTicket) {
-      throw new Forbidden(
-        "you cannot remove yourself from an event you created, cancel it instead"
-      );
-    }
+    // if (loggedInUserIsOwner && loggedInUserHasTicket) {
+    //   throw new Forbidden(
+    //     "you cannot remove yourself from an event you created, cancel it instead"
+    //   );
+    // }
     if (!loggedInUserIsOwner && !loggedInUserHasTicket) {
       throw new Forbidden("you can only remove yourself from an event");
     }
     await ticket.remove();
-    // return ticket;
+    await event.capacity++;
+    await event.save();
+    // await ticket.save();
+    return ticket;
   }
   async getEventTickets(eventId) {
     const tickets = await dbContext.Tickets.find({ eventId }).populate(
@@ -28,32 +31,33 @@ class TicketsService {
       "name picture"
     );
     return tickets;
-    //   async getEventComments(eventId) {
-    //   const comments = await dbContext.Comments.find({ eventId }).populate(
-    //     "creator",
-    //     "name picture"
-    //   );
-    //   return comments;
-    // }
   }
   async getMyEventTickets(accountId) {
     const tickets = await dbContext.Tickets.find({ accountId }).populate(
       "event",
       "name coverImg"
     );
+
     return tickets;
   }
-  async addTicketToEvent(eventId, accountId) {
-    const event = await eventsService.getEventIfNotCanceled(eventId);
-    const hasTicket = await this.getTicketForEvent(eventId, accountId);
+  async addTicketToEvent(ticketData) {
+    const event = await eventsService.getEventIfNotCanceled(ticketData.eventId);
+    const hasTicket = await this.getTicketForEvent(
+      ticketData.eventId,
+      ticketData.accountId
+    );
     if (hasTicket) {
+      // throw new BadRequest("you already have a ticket");
       return hasTicket;
     }
-    if (event.capacity <=0 ) {
-      throw new BadRequest('sorry we are out of tickets')
+    if (event.capacity <= 0) {
+      throw new BadRequest("sorry we are out of tickets");
     }
-    const ticket = await dbContext.Tickets.create({ eventId, accountId });
-    event.capacity--;
+    const ticket = await dbContext.Tickets.create(ticketData);
+    if (ticket) {
+      event.capacity--;
+    }
+    await event.save();
     // ticket.capacity--;
     await ticket.populate("profile", "name picture");
     return ticket;

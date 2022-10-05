@@ -6,7 +6,7 @@ import BaseController from "../utils/BaseController.js";
 
 export class EventsController extends BaseController {
   constructor() {
-    super("/api/events");
+    super("api/events");
     this.router
       .get("", this.getEvents)
       .get("/:eventId", this.getEventById)
@@ -15,7 +15,7 @@ export class EventsController extends BaseController {
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post("", this.createEvent)
       .put("/:eventId", this.editEvent)
-      .delete("/:eventId,", this.cancelEvent);
+      .delete("/:eventId", this.cancelEvent);
   }
   async getEvents(req, res, next) {
     try {
@@ -67,7 +67,9 @@ export class EventsController extends BaseController {
   }
   async getEventComments(req, res, next) {
     try {
-      const comments = await commentsService.getEventComments(req.params.id);
+      const comments = await commentsService.getEventComments(
+        req.params.eventId
+      );
       res.send(comments);
     } catch (error) {
       next(error);
@@ -75,7 +77,7 @@ export class EventsController extends BaseController {
   }
   async getEventTickets(req, res, next) {
     try {
-      const tickets = await ticketsService.getEventTickets(req.params.id);
+      const tickets = await ticketsService.getEventTickets(req.params.eventId);
       res.send(tickets);
     } catch (error) {
       next(error);

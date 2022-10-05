@@ -18,7 +18,7 @@ class CommentsService {
     if (userId != comment.creatorId.toString()) {
       throw new Forbidden("not your comment");
     }
-    comment.remove();
+    await comment.remove();
     return comment;
   }
 

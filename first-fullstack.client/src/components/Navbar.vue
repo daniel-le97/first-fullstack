@@ -17,24 +17,35 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav me-auto">
-        <!-- <li>
-          <router-link :to="{ name: 'Event' }" class="btn text-success lighten-30 selectable text-uppercase">
-            Event
-          </router-link>
-        </li> -->
-      </ul>
-      <!-- LOGIN COMPONENT HERE -->
-      <!-- <Login /> -->
+      <input type="text" class="form-control w-50" placeholder="search..." v-model="editable" @input="SearchEvents(editable)">
     </div>
   </nav>
 </template>
 
 <script>
+import { computed } from '@vue/reactivity';
+import { ref } from 'vue';
+import { AppState } from '../AppState.js';
+import { eventsService } from '../services/EventsService.js';
+import Pop from '../utils/Pop.js';
+
 // import Login from './Login.vue'
 export default {
   setup() {
-    return {}
+    const editable = ref('')
+    return {
+      editable,
+      //  async SearchEvents(editable){
+      //   try {
+      //       await eventsService.SearchEvents(editable)
+      //     } catch (error) {
+            
+      //       Pop.error(error)
+      //     }
+       
+      //   },
+      // events: computed(() => AppState.events.filter(e => e.name.toUpperCase().includes(editable.value.toUpperCase())))
+    }
   },
   // components: { Login }
 }

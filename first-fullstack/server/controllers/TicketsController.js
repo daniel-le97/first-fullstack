@@ -14,8 +14,8 @@ export class TicketsController extends BaseController {
     try {
       req.body.accountId = req.userInfo.id;
       const ticket = await ticketsService.addTicketToEvent(
-        req.body.eventId,
-        req.userInfo.id
+        req.body
+        // req.userInfo.id
       );
       res.send(ticket);
     } catch (error) {

@@ -27,9 +27,25 @@ export default {
         Pop.error(error);
       }
     }
+    async function getEventTickets() {
+      try {
+        await eventsService.getEventTickets(route.params.id);
+      } catch (error) {
+        Pop.error(error, "[getEventTickets]");
+      }
+    }
+    async function getEventComments() {
+      try {
+        await eventsService.getEventComments(route.params.id);
+      } catch (error) {
+        Pop.error(error, "[getEventComments]");
+      }
+    }
 
     onMounted(() => {
       getEventById();
+      getEventTickets();
+      getEventComments();
     });
     return {
       event: computed(() => AppState.activeEvent),

@@ -13,7 +13,9 @@ export class CommentsController extends BaseController {
   }
   async getCommentById(req, res, next) {
     try {
-      const comment = await commentsService.getCommentById(req.params.id);
+      const comment = await commentsService.getCommentById(
+        req.params.commentId
+      );
       res.send(comment);
     } catch (error) {
       next(error);
@@ -32,7 +34,7 @@ export class CommentsController extends BaseController {
     try {
       const comment = await commentsService.deleteComment(
         req.params.commentId,
-        req.userInfo.Id
+        req.userInfo.id
       );
       res.send(comment);
     } catch (error) {
