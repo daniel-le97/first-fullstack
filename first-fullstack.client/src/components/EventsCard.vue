@@ -12,7 +12,7 @@
           >{{ event.capacity }}
           <span class="text-shadow">spots left</span></span
         >
-        <span>{{ event.id }}</span>
+        <span>{{ event.type}}</span>
         
       </div>
       <!--  -->
