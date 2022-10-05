@@ -8,7 +8,7 @@ export const EventSchema = new Schema(
     description: { type: String, required: true },
     coverImg: { type: String, required: true },
     location: { type: String, required: true },
-    capacity: { type: Number, required: true },
+    capacity: { type: Number, default: 2 },
     startDate: { type: Date, required: true },
     isCanceled: { type: Boolean, default: false },
     type: {

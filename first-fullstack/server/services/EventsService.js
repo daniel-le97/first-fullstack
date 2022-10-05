@@ -5,25 +5,30 @@ import { BadRequest, Forbidden } from "../utils/Errors.js";
 
 class EventsService {
   async editEvent(body, eventId, userInfo) {
-    const event = await this.getEventById(eventId);
+    const event = await this.getEventIfNotCanceled(eventId);
     if (userInfo.id != event.creatorId.toString()) {
       throw new BadRequest("invalid event id for edits");
     }
+    if (!event) {
+      throw new BadRequest('cannot edit an events status please cancel it instead')
+    }
     event.name = body.name || event.name;
-    event.description = body.description || event.name;
+    event.description = body.description || event.description;
 
     await event.save();
     return event;
   }
   async cancelEvent(eventId, userInfo) {
-    const event = await this.getEventById(eventId);
+    const event = await this.getEventIfNotCanceled(eventId);
     let eventCreatorId = event.creatorId.toString();
     if (eventCreatorId != userInfo.id) {
       throw new Forbidden("swiper no swiping, that event is not yours!");
     }
     event.isCanceled = true;
     await event.save();
-    return event;
+
+    const activeEvent = await this.getEventById(eventId);
+    return activeEvent;
   }
 
   async getEventById(id) {
