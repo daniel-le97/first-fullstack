@@ -8,30 +8,34 @@
       Login
     </button>
 
-    <div class="dropdown my-2 my-lg-0 d-flex flex-column" v-else>
-      <div
-        class="dropdown-toggle selectable"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-        id="authDropdown"
-      >
-        <div v-if="account.picture || user.picture" class="rounded">
-          <img
-            :src="account.picture || user.picture"
-            alt="account photo"
-            height=""
-            class="rounded p-2 img-fluid "
-          />
-          <!-- <span class="mx-3 text-success lighten-30">{{ account.name || user.name }}</span> -->
-        </div>
-      </div>
-      <div class="dropdown-menu p-0 list-group w-100" aria-labelledby="authDropdown">
+    <div class="my-2 my-lg-0 d-flex flex-column" v-else>
+      <div>
         <router-link :to="{ name: 'Account' }">
-          <div class="list-group-item list-group-item-action hoverable">
-            Manage Account
+          <div v-if="account.picture || user.picture" class="rounded">
+            <img
+              :src="account.picture || user.picture"
+              alt="account photo"
+              height=""
+              class="rounded-5 p-2 img-fluid"
+            />
           </div>
         </router-link>
-        <div class="list-group-item list-group-item-action hoverable text-danger" @click="logout">
+      </div>
+      <div class="text-center">
+        <router-link :to="{ name: 'Home' }">
+          <button class="btn btn-primary p-1">home</button>
+        </router-link>
+      </div>
+      <div class="p-1 w-100">
+        <router-link :to="{ name: 'Account' }">
+          <div class="btn hoverable d-flex justify-content-center my-2">
+            Account
+          </div>
+        </router-link>
+        <div
+          class="hoverable btn btn-success text-dark d-flex justify-content-center"
+          @click="logout"
+        >
           <i class="mdi mdi-logout"></i>
           logout
         </div>
@@ -41,23 +45,23 @@
 </template>
 
 <script>
-import { computed } from 'vue'
-import { AppState } from '../AppState'
-import { AuthService } from '../services/AuthService'
+import { computed } from "vue";
+import { AppState } from "../AppState";
+import { AuthService } from "../services/AuthService";
 export default {
   setup() {
     return {
       user: computed(() => AppState.user),
       account: computed(() => AppState.account),
       async login() {
-        AuthService.loginWithPopup()
+        AuthService.loginWithPopup();
       },
       async logout() {
-        AuthService.logout({ returnTo: window.location.origin })
-      }
-    }
-  }
-}
+        AuthService.logout({ returnTo: window.location.origin });
+      },
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
