@@ -34,8 +34,7 @@ class TicketsService {
   }
   async getMyEventTickets(accountId) {
     const tickets = await dbContext.Tickets.find({ accountId }).populate(
-      "event",
-      "name coverImg"
+      "event"
     );
 
     return tickets;

@@ -12,8 +12,7 @@
           >{{ event.capacity }}
           <span class="text-shadow">spots left</span></span
         >
-        <span>{{ event.type}}</span>
-        
+        <span>{{ event.type }}</span>
       </div>
       <!--  -->
     </div>
@@ -38,7 +37,11 @@ export default {
   width: 287px;
   height: 251px;
   object-fit: cover;
+  object-position: center;
 }
+// .event-card:hover {
+//   transform: scale(0.75);
+// }
 .event-details {
   background: rgba(204, 243, 253, 0.2);
   border: 1px solid rgba(86, 199, 251, 0.2);

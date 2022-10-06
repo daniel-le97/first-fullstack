@@ -22,6 +22,9 @@
       <button class="btn btn-light" @click="getEventsByType('sport')">
         sports
       </button>
+      <button class="btn btn-light" @click="getEventsByType('expo')">
+        expo
+      </button>
       <button class="btn btn-light" @click="getEventsByType('digital')">
         digital
       </button>
@@ -56,6 +59,9 @@ export default {
 .hero-img {
   background-image: url("../assets/img/andrei-stratu-kcJsQ3PJrYU-unsplash.jpg");
   background-size: cover;
+}
+.btn:hover{
+  transform: scale(1.2);
 }
 
 .text-shadow {

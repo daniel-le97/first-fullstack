@@ -14,7 +14,7 @@ export const EventSchema = new Schema(
     type: {
       type: String,
       required: true,
-      enum: ["concert", "convention", "sport", "digital"],
+      enum: ["concert", "convention", "sport", "digital", 'expo'],
     },
     // STUB be to sure add whats appropriate
     creatorId: { type: ObjectId, ref: "Account", required: true },

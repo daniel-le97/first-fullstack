@@ -17,38 +17,54 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
-      <input type="text" class="form-control w-50" placeholder="search..." v-model="editable" @input="SearchEvents(editable)">
+      <input
+        type="text"
+        class="form-control w-50"
+        placeholder="search..."
+        v-model="editable"
+        @input="SearchEvents(editable)"
+      />
+    </div>
+    <div>
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#staticBackdrop"
+      >
+        Add an event
+      </button>
     </div>
   </nav>
 </template>
 
 <script>
-import { computed } from '@vue/reactivity';
-import { ref } from 'vue';
-import { AppState } from '../AppState.js';
-import { eventsService } from '../services/EventsService.js';
-import Pop from '../utils/Pop.js';
+import { computed } from "@vue/reactivity";
+import { ref } from "vue";
+import { AppState } from "../AppState.js";
+import { eventsService } from "../services/EventsService.js";
+import Pop from "../utils/Pop.js";
 
 // import Login from './Login.vue'
 export default {
   setup() {
-    const editable = ref('')
+    const editable = ref("");
     return {
       editable,
       //  async SearchEvents(editable){
       //   try {
       //       await eventsService.SearchEvents(editable)
       //     } catch (error) {
-            
+
       //       Pop.error(error)
       //     }
-       
+
       //   },
       // events: computed(() => AppState.events.filter(e => e.name.toUpperCase().includes(editable.value.toUpperCase())))
-    }
+    };
   },
   // components: { Login }
-}
+};
 </script>
 
 <style scoped>
