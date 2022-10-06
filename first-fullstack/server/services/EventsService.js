@@ -10,7 +10,9 @@ class EventsService {
       throw new BadRequest("invalid event id for edits");
     }
     if (!event) {
-      throw new BadRequest('cannot edit an events status please cancel it instead')
+      throw new BadRequest(
+        "cannot edit an events status please cancel it instead"
+      );
     }
     event.name = body.name || event.name;
     event.description = body.description || event.description;
@@ -32,7 +34,7 @@ class EventsService {
   }
 
   async getEventById(id) {
-    const event = await await dbContext.Events.findById(id).populate(
+    const event = await dbContext.Events.findById(id).populate(
       "creator",
       "name picture"
     );
