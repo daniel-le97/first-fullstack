@@ -91,10 +91,11 @@ class EventsService {
   async cancelEvent(eventId) {
     const res = await api.delete(`/api/events/${eventId}`);
     console.log(res.data);
-    let event = AppState.events.find((e) => e.id == eventId);
-    console.log(event);
-    event.isCanceled = true;
-    console.log(event);
+    // let event = AppState.events.find((e) => e.id == eventId);
+    // console.log(event);
+    // event.isCanceled = true;
+    // console.log(event);
+    AppState.activeEvent.isCanceled = true;
   }
 }
 export const eventsService = new EventsService();
