@@ -43,30 +43,31 @@
         </div>
         <p v-if="!event.isCanceled">{{ event.description }}</p>
         <div v-else>
-          <p class="fs-1 text-danger">This Event has been Canceled, sorry!</p>
+          <p class="fs-1 text-danger">This Event has been canceled or sold out</p>
         </div>
         <div class="d-flex justify-content-between mb-3 me-2">
           <div class="d-flex gap-3 align-items-end">
             <span class="text-warning">{{ event.capacity }}</span>
             <span>spots left</span>
           </div>
-
-          <div v-if="!event.isCanceled">
-            <button
-              class="btn btn-danger"
-              @click="removeTicket(event.id)"
-              v-if="hasTicket"
-            >
-              remove <i class="mdi mdi-account-minus"></i>
-            </button>
-            <button
-              class="btn btn-warning"
-              @click="createTicket(event.id)"
-              v-else
-            >
-              Attend
-              <i class="mdi mdi-account-plus"></i>
-            </button>
+          <div v-if="!routeA">
+            <div v-if="!event.isCanceled">
+              <button
+                class="btn btn-danger"
+                @click="removeTicket(event.id)"
+                v-if="hasTicket"
+              >
+                remove <i class="mdi mdi-account-minus"></i>
+              </button>
+              <button
+                class="btn btn-warning"
+                @click="createTicket(event.id)"
+                v-else
+              >
+                Attend
+                <i class="mdi mdi-account-plus"></i>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -94,6 +95,7 @@ export default {
     const route = useRoute();
     const editable = ref({});
     return {
+      routeA: computed(() => route.name == "Account"),
       // thisTicket: computed(() =>
       //   AppState.myTickets.find((t) => t.eventId == this.event.id)
       // ),

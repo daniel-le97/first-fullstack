@@ -2,7 +2,7 @@ import { Account } from "./Account.js";
 
 export class Event {
   constructor(data) {
-    this.id = data.id 
+    this.id = data.id
     this.coverImg = data.coverImg;
     this.createdAt = new Date(data.createdAt).toLocaleDateString("en-US", {
       year: "2-digit",
@@ -10,7 +10,7 @@ export class Event {
       day: "2-digit",
       hour: "numeric",
       minute: "numeric",
-    });
+    })
     this.location = data.location;
     this.type = data.type;
     this.name = data.name;
