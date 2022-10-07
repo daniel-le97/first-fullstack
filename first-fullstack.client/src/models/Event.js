@@ -14,7 +14,8 @@ export class Event {
     this.location = data.location;
     this.type = data.type;
     this.name = data.name;
-    this.creator = new Account(data.creator);
+    // this.creator = new Account(data.creator) 
+    this.creatorId = data.creatorId
     this.startDate = new Date(data.startDate).toLocaleDateString("en-US", {
       year: "2-digit",
       month: "short",

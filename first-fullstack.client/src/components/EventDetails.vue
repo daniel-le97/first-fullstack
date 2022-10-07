@@ -21,11 +21,11 @@
         class="col-md-8 text-shadow d-flex flex-column justify-content-between"
       >
         <!--  -->
-        <div class="d-flex justify-content-end mt-1">
+        <div class="d-flex justify-content-end mt-1" v-if="!routeA">
           <button
             class="btn btn-primary"
             @click="cancelEvent(event.id)"
-            v-if="event.creator?.id == account?.id && !event?.isCanceled"
+            v-if="event.creatorId == account?.id && !event?.isCanceled"
           >
             cancel event?
           </button>
@@ -43,14 +43,16 @@
         </div>
         <p v-if="!event.isCanceled">{{ event.description }}</p>
         <div v-else>
-          <p class="fs-1 text-danger">This Event has been canceled or sold out</p>
+          <p class="fs-1 text-danger">
+            This Event has been canceled or sold out
+          </p>
         </div>
         <div class="d-flex justify-content-between mb-3 me-2">
           <div class="d-flex gap-3 align-items-end">
             <span class="text-warning">{{ event.capacity }}</span>
             <span>spots left</span>
           </div>
-          <div v-if="!routeA">
+          <div >
             <div v-if="!event.isCanceled">
               <button
                 class="btn btn-danger"
@@ -113,7 +115,8 @@ export default {
           editable.value.eventId = id;
           editable.value.accountId = AppState.account.id;
           console.log(editable.value);
-          await eventsService.createTicket(editable.value);
+          await eventsService.createTicket(editable.value)
+          // props.event.capacity;
         } catch (error) {
           Pop.error(error, "[createTicket]");
         }
@@ -126,12 +129,17 @@ export default {
           // console.log(ticket);
           let id = ticket.id;
           await eventsService.removeTicket(id);
+          props.event.capacity++
         } catch (error) {
           Pop.error(error);
         }
       },
       async cancelEvent(eventId) {
         try {
+          // let event = AppState.events.find(
+          //   (e) => e.creatorId == AppState.account.id
+          // );
+          // let eventId = event.id;
           await eventsService.cancelEvent(eventId);
         } catch (error) {
           Pop.error(error);

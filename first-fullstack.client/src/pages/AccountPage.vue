@@ -4,22 +4,22 @@
       <div class="col-12">
         <div class="text-light">my Events</div>
         <div class="row">
-          <!-- <div class="col-md-3 mt-4" v-for="e in myEvents" :key="e.id">
+          <div class="col-md-3 mt-4" v-for="e in myEvents" :key="e.id">
             <div class="p-1 bg-dark lighten-25 rounded">
               <EventsCard :event="e" />
             </div>
-          </div> -->
+          </div>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-12" >
         <div class="text-light">My tickets</div>
-        <!-- <div class="mx-5 px-5" v-for=" t in myTickets" >
+        <div class="mx-5 px-5" v-for=" t in myTickets" >
           <div class="my-5">
             <EventDetails :event="t.event"/>
           </div>
-        </div> -->
+        </div>
         <!-- <div v-for="t in myTickets" :key="t.id" class="mx-5 px-5">
           <div class="my-5">
             <EventDetails :event="t.event" v-if="t" />
@@ -47,24 +47,24 @@ export default {
         Pop.error(error, "[getMyTickets]");
       }
     }
-    // async function getMyEvents() {
-    //   try {
-    //     await eventsService.getAllEvents();
-    //   } catch (error) {
-    //     Pop.error(error);
-    //   }
-    // }
+    async function getMyEvents() {
+      try {
+        await eventsService.getAllEvents();
+      } catch (error) {
+        Pop.error(error);
+      }
+    }
 
     onMounted(() => {
       getMyTickets();
-      // getMyEvents();
+      getMyEvents();
     });
     return {
       account: computed(() => AppState.account),
       myTickets: computed(() => AppState.myTickets),
-      // myEvents: computed(() =>
-      //   AppState.events.filter((e) => e.creator.id == AppState.account.id)
-      // ),
+      myEvents: computed(() =>
+        AppState.events.filter((e) => e.creatorId == AppState.account.id)
+      ),
     };
   },
   components: { EventsCard, EventDetails },

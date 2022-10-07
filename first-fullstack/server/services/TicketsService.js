@@ -63,7 +63,7 @@ class TicketsService {
   async getTicketForEvent(eventId, accountId) {
     const ticket = await dbContext.Tickets.findOne({ eventId, accountId })
       .populate("profile", "name picture")
-      .populate("event", "");
+      .populate("event");
     return ticket;
   }
 

@@ -24,7 +24,8 @@ class EventsService {
     // console.log(AppState.events);
   }
   async getEventById(eventId) {
-    const res = await api.get(`/api/events/${eventId}`);
+    const res = await api.get(`/api/events/${eventId}`)
+    console.log(res.data);
     AppState.activeEvent = new Event(res.data);
   }
   async getEventTickets(eventId) {
@@ -73,7 +74,9 @@ class EventsService {
     AppState.attendees = AppState.attendees.filter(
       (a) => a.id != res.data.accountId
     );
-    AppState.activeEvent.capacity++;
+    // let event = AppState.events.find(e => e.id == res.data.eventId)
+    // event.capacity++
+    // AppState.activeEvent.capacity++;
     // console.log(ticketId);
   }
 
