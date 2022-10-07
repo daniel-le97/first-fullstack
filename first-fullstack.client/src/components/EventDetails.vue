@@ -3,7 +3,7 @@
     <div class="row blur">
       <div
         class="d-flex justify-content-end mt-1"
-        v-if="account?.id == event?.creator.id"
+      
       >
         <button
           class="btn btn-primary"
