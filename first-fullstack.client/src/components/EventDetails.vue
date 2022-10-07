@@ -105,7 +105,7 @@ export default {
       },
       async removeTicket(eventId) {
         try {
-          let ticket = AppState.myTickets.find((t) => t.eventId == eventId);
+          let ticket = AppState.myTickets.find((t) => t.profile.id == AppState.account.id);
           // console.log(ticket);
           let id = ticket.id;
           await eventsService.removeTicket(id);
