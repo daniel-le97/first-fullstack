@@ -5,7 +5,7 @@
         <img alt="logo" src="../assets/img/cw-logo.png" height="45" />
       </div>
     </router-link>
-    <button
+    <!-- <button
       class="navbar-toggler"
       type="button"
       data-bs-toggle="collapse"
@@ -24,11 +24,11 @@
         v-model="editable"
         @input="SearchEvents(editable)"
       />
-    </div>
-    <div>
+    </div> -->
+    <div class="mt-2 mt-md-0 d-flex justify-content-center align-items-center">
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-primary mt-sm-2 mt-0"
         data-bs-toggle="modal"
         data-bs-target="#staticBackdrop"
       >

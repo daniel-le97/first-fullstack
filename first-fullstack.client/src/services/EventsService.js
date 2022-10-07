@@ -37,7 +37,7 @@ class EventsService {
     const res = await api.get(`/api/events/${eventId}/comments`);
     // console.log(res.data);
     AppState.comments = res.data.map((c) => new Comment(c));
-    console.log(AppState.comments);
+    // console.log(AppState.comments);
   }
   async searchEvents(editable) {
     AppState.events = AppState.events.filter((event) =>
@@ -61,6 +61,7 @@ class EventsService {
     console.log(res.data);
     AppState.myTickets.push(res.data);
     AppState.attendees.push(new Attendee(res.data));
+    console.log(AppState.attendees);
     AppState.activeEvent.capacity--;
   }
   async removeTicket(ticketId) {

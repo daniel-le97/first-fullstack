@@ -4,7 +4,8 @@ export class Attendee {
   constructor(data) {
     this.id = data.profile.id;
     this.name = data.profile.name;
-    this.picture = data.profile.picture;
+    // this.picture = data.profile.picture;
+    this.profile = new Account(data.profile);
     this.eventId = data.eventId;
     this.accountId = data.accountId;
     // this.profile = new Account(data.profile);

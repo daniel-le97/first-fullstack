@@ -10,10 +10,10 @@
         class="col-12 d-flex flex-wrap bg-dark lighten-25 rounded my-4"
         v-if="attendees"
       >
-        <div class="row flex-wrap">
-          <!-- <div class="col-1" v-for="a in attendees" :key="a.id">
+        <div class="row flex-wrap" v-if="attendees">
+          <div class="col-3 p-1" v-for="a in attendees" :key="a.id">
             <EventAttendees :attendee="a" />
-          </div> -->
+          </div>
         </div>
       </div>
     </div>

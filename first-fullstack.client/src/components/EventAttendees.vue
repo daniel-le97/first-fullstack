@@ -1,12 +1,6 @@
 <template>
   <div class="event-attendee">
-    <img
-      :src="attendee.picture"
-      :alt="attendee.name"
-      width="45px"
-      height="45px"
-      class="rounded"
-    />
+    <img :src="attendee.profile.picture" :alt="attendee.name" class="rounded img-fluid" />
   </div>
 </template>
 
@@ -17,7 +11,7 @@ export default {
   props: {
     attendee: { type: Attendee, required: true },
   },
-  setup() {
+  setup(props) {
     return {};
   },
 };

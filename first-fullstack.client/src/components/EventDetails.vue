@@ -1,7 +1,7 @@
 <template>
   <div class="event-details container" v-if="event">
     <div class="row blur">
-      <div
+      <!-- <div
         class="d-flex justify-content-end mt-1"
       
       >
@@ -12,16 +12,27 @@
         >
           cancel event?
         </button>
-      </div>
-      <div class="col-4 py-3">
+      </div> -->
+      <div class="col-md-4 py-3">
         <img :src="event.coverImg" alt="" class="img-fluid h-100" />
         <!--  -->
       </div>
-      <div class="col-8 text-shadow d-flex flex-column justify-content-between">
+      <div class="col-md-8 text-shadow d-flex flex-column justify-content-between">
         <!--  -->
-        <div class="text-center">{{ event.type }}</div>
+        <div class="d-flex justify-content-end mt-1">
+          <button
+            class="btn btn-primary"
+            @click="cancelEvent(event.id)"
+            v-if="!event.isCanceled"
+          >
+            cancel event?
+          </button>
+        </div>
+        <div>
+          <div class="text-center">{{ event.type }}</div>
+        </div>
         <div class="d-flex justify-content-between">
-          <span>{{ event.name }}</span>
+          <span class="fs-5 fw-bold">{{ event.name }}</span>
           <span>{{ event.startDate }}</span>
         </div>
         <div class="d-flex justify-content-between">
@@ -34,7 +45,7 @@
         </div>
         <div class="d-flex justify-content-between mb-3 me-2">
           <div class="d-flex gap-3 align-items-end">
-            <span class="text-primary">{{ event.capacity }}</span>
+            <span class="text-warning">{{ event.capacity }}</span>
             <span>spots left</span>
           </div>
 
@@ -105,7 +116,9 @@ export default {
       },
       async removeTicket(eventId) {
         try {
-          let ticket = AppState.myTickets.find((t) => t.profile.id == AppState.account.id);
+          let ticket = AppState.myTickets.find(
+            (t) => t.profile.id == AppState.account.id
+          );
           // console.log(ticket);
           let id = ticket.id;
           await eventsService.removeTicket(id);
