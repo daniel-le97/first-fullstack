@@ -2,7 +2,7 @@
   <div class="comment-creator container my-3">
     <div class="row">
       <div class="col-1 text-center p-0">
-       <img :src="comment.creator.picture" class="img rounded-circle" >
+       <img :src="comment.creator.picture" :alt="comment.creator.name" :title="comment.creator.name" class="img rounded-circle" >
       </div>
       <div class="col-11 bg-light text-dark rounded">
         <h5>{{comment.creator.name}}</h5>

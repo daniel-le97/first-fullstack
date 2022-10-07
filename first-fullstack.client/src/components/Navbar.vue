@@ -1,11 +1,11 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3 d-flex flex-row justify-content-between">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }" aria-label="home-logo-button">
-      <div class="d-flex flex-column align-items-center logo-img">
+      <div class="d-flex flex-column align-items-center logo-img hover">
         <img src="../assets/img/Logo.png" alt="" width="250" />
       </div>
     </router-link>
- <div>
+ <div class="d-md-none">
    <span class="navbar-text">
     <button
       class="btn selectable text-success lighten-30 text-uppercase my-2 my-lg-0"
@@ -15,9 +15,8 @@
     >
       Login
     </button>
-    
-
-    <div class="my-2 my-lg-0 d-flex " v-else>
+  
+    <div class="my-2 my-lg-0 d-flex ">
       <div class="d-flex justify-content-between align-items-center">
         <router-link :to="{ name: 'Account' }" aria-label="account-picture-button">
           <div v-if="account.picture || user.picture" class="rounded">
@@ -54,7 +53,7 @@
     <div class="mt-2 mt-md-0 d-flex justify-content-center align-items-center">
       <button
         type="button"
-        class="btn btn-primary mt-sm-2 mt-0"
+        class="btn btn-primary mt-sm-2 mt-0 hover"
         data-bs-toggle="modal"
         data-bs-target="#staticBackdrop"
         aria-label="addEventForm"
@@ -118,5 +117,8 @@ a:hover {
 
 .logo-image {
   max-height: 2vh;
+}
+.hover:hover{
+  transform: scale(1.1);
 }
 </style>

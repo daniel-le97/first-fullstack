@@ -8,7 +8,7 @@
         <div class="col-11 order-first">
           <router-view />
         </div>
-        <div class="col-1 p-0 bg-dark lighten-20 height100 scroll-none d-none d-md-block ">
+        <div class="col-1 p-0 bg-dark lighten-20 height100 scroll-none d-none d-md-block  ">
           <Login />
           <!--  -->
         </div>

@@ -3,6 +3,7 @@
     <button
       class="btn selectable text-success lighten-30 text-uppercase my-2 my-lg-0"
       @click="login"
+      aria-label="login-button"
       v-if="!user.isAuthenticated"
     >
       Login
@@ -10,8 +11,8 @@
 
     <div class="my-2 my-lg-0 d-flex flex-column" v-else>
       <div>
-        <router-link :to="{ name: 'Account' }">
-          <div v-if="account.picture || user.picture" class="rounded">
+        <router-link :to="{ name: 'Account' }" aria-label="account-picture-button">
+          <div v-if="account.picture || user.picture" class="rounded hover">
             <img
               :src="account.picture || user.picture"
               alt="account photo"
@@ -22,19 +23,20 @@
         </router-link>
       </div>
       <div class="text-center">
-        <router-link :to="{ name: 'Home' }">
-          <button class="btn btn-primary p-1">home</button>
+        <router-link :to="{ name: 'Home' }" aria-label="home-button">
+          <div class="btn hoverable d-flex align-items-center justify-content-center text-light fw-bold hover">Home</div>
         </router-link>
       </div>
       <div class="p-1 w-100">
-        <router-link :to="{ name: 'Account' }">
-          <div class="btn hoverable d-flex justify-content-center my-2">
+        <router-link :to="{ name: 'Account' }" aria-label="account-button">
+          <div class="btn hoverable d-flex justify-content-center my-2 text-light fw-bold hover">
             Account
           </div>
         </router-link>
         <div
-          class="hoverable btn btn-success text-dark d-flex justify-content-center"
+          class="hoverable btn btn-success text-dark d-flex justify-content-center hover"
           @click="logout"
+          aria-label="logout-button"
         >
           <i class="mdi mdi-logout"></i>
           logout
@@ -78,5 +80,8 @@ export default {
 
 .hoverable {
   cursor: pointer;
+}
+.hover:hover{
+  transform: scale(1.1);
 }
 </style>

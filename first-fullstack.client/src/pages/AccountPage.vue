@@ -18,18 +18,16 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-12">
+      <div class="col-12" v-if="myTickets">
         <div class="text-light">My tickets</div>
         <div class="mx-5 px-5" v-for="t in myTickets">
           <div class="my-5">
             <EventDetails :event="t.event" />
           </div>
         </div>
-        <!-- <div v-for="t in myTickets" :key="t.id" class="mx-5 px-5">
-          <div class="my-5">
-            <EventDetails :event="t.event" v-if="t" />
-          </div>
-        </div> -->
+      </div>
+      <div class="fs-1 text-light" v-else>
+        Get tickets!
       </div>
     </div>
   </div>

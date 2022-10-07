@@ -1,11 +1,13 @@
 <template>
-  <router-link :to="{ name: 'Event', params: { id: event.id } }">
+  <router-link :to="{ name: 'Event', params: { id: event.id } }"
+  aria-label="event-details-button">
     <div
       class="event-card d-flex align-items-end ms-sm-0 ms-2 "
       :style="{ backgroundImage: `url(${event.coverImg})` }"
+      :title="event.name"
     >
       <div
-        class="event-details text-shadow d-flex flex-column align-items-baseline w-100"
+        class="event-details text-shadow d-flex flex-column  w-100"
         v-if="!event.isCanceled"
       >
         <span class="ms-2 fs-5">{{ event.name }}</span>
@@ -40,7 +42,7 @@ export default {
 
 <style lang="scss" scoped>
 .event-card {
-  width: 287px;
+  width: auto;
   height: 251px;
   object-fit: cover;
   object-position: center;

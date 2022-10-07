@@ -116,8 +116,9 @@
                     <img
                     required
                       :src="editable.coverImg"
-                      alt=""
+                      :alt="editable.name"
                       class="img-fluid rounded"
+                      :title="editable.name"
                     />
                   </div>
                   <div class="text-center mt-3">

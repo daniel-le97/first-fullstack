@@ -2,6 +2,8 @@
   <div>
     <div
       class="card h-25 hero-img text-shadow gap-2 d-flex justify-content-center"
+      aria-label="cover-image"
+      title="tower-home-image"
     >
       <span class="ms-5">get ahead of the crowd</span>
       <span class="ms-5">reserve your seats here</span>

@@ -14,7 +14,7 @@
         </button>
       </div> -->
       <div class="col-md-4 py-3">
-        <img :src="event.coverImg" alt="" class="img-fluid h-100" />
+        <img :src="event.coverImg" :alt="event.name" :title="event.name" class="img-fluid h-100" />
         <!--  -->
       </div>
       <div
@@ -26,6 +26,7 @@
             class="btn btn-primary"
             @click="cancelEvent(event.id)"
             v-if="event.creatorId == account?.id && !event?.isCanceled"
+            aria-label="cancel-event"
           >
             cancel event?
           </button>
@@ -67,20 +68,22 @@
                 class="btn btn-danger"
                 @click="removeTicket(event.id)"
                 v-if="hasTicket"
+                aria-label="un-attend event"
               >
-                remove <i class="mdi mdi-account-minus"></i>
+                not going <i class="mdi mdi-account-minus"></i>
               </button>
               <button
                 class="btn btn-warning"
                 @click="createTicket(event.id)"
                 v-else
+                aria-label="attend-event"
               >
                 Attend
                 <i class="mdi mdi-account-plus"></i>
               </button>
             </div>
             <div v-else class="d-flex justify-content-end">
-              <router-link :to="{ name: 'Event', params: { id: event.id } }">
+              <router-link :to="{ name: 'Event', params: { id: event.id } }" aria-label="event-page-button">
                <div class="text-shadow  btn btn-danger">
                 go to event page
                </div>

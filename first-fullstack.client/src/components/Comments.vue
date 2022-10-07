@@ -19,10 +19,10 @@
             <!-- <label for="textArea">comment</label> -->
           </div>
           <div class="text-end mt-2">
-            <button type="submit" class="btn btn-success" v-if="account?.id">
+            <button type="submit" class="btn btn-success" v-if="account?.id" aria-label="post-comment">
               post comment
             </button>
-            <button type="submit" class="btn btn-success" v-else>
+            <button type="submit" class="btn btn-success" v-else aria-label="login-comment-button">
               please login to comment
             </button>
           </div>
