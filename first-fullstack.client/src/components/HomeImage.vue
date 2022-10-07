@@ -9,23 +9,24 @@
     </div>
   </div>
   <div>
+     
     <div
-      class="d-flex gap-5 justify-content-evenly mt-2 p-2 bg-dark lighten-25 rounded"
+      class="d-md-flex gap-5 gap-sm-0 flex-wrap justify-content-evenly mt-2  p-2  bg-dark lighten-25 rounded"
     >
-      <button class="btn btn-light" @click="getEventsByType('')">all</button>
-      <button class="btn btn-light" @click="getEventsByType('concert')">
+      <button class="btn btn-light m-1 m-md-0 ms-3 ms-md-0" @click="getEventsByType('')">all</button>
+      <button class="btn btn-light" @click="getEventsByType('concert')" aria-label="get-Event-by-concert">
         concerts
       </button>
-      <button class="btn btn-light" @click="getEventsByType('convention')">
+      <button class="btn btn-light m-1 m-md-0" @click="getEventsByType('convention')" aria-label="get-Event-by-convention">
         conventions
       </button>
-      <button class="btn btn-light" @click="getEventsByType('sport')">
+      <button class="btn btn-light m-1 m-md-0 ms-4 ms-md-0" @click="getEventsByType('sport')" aria-label="get-Event-by-sport">
         sports
       </button>
-      <button class="btn btn-light" @click="getEventsByType('expo')">
+      <button class="btn btn-light m-1 m-md-0" @click="getEventsByType('expo')" aria-label="get-Event-by-expo">
         expo
       </button>
-      <button class="btn btn-light" @click="getEventsByType('digital')">
+      <button class="btn btn-light m-1 m-md-0" @click="getEventsByType('digital')" aria-label="get-Event-by-digital">
         digital
       </button>
     </div>

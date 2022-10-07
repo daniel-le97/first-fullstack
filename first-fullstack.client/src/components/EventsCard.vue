@@ -1,17 +1,17 @@
 <template>
   <router-link :to="{ name: 'Event', params: { id: event.id } }">
     <div
-      class="event-card d-flex align-items-end"
+      class="event-card d-flex align-items-end ms-sm-0 ms-2 "
       :style="{ backgroundImage: `url(${event.coverImg})` }"
     >
       <div
-        class="event-details text-shadow d-flex flex-column w-100"
+        class="event-details text-shadow d-flex flex-column align-items-baseline w-100"
         v-if="!event.isCanceled"
       >
-        <span class="ms-2">{{ event.name }}</span>
+        <span class="ms-2 fs-5">{{ event.name }}</span>
         <span class="ms-2">{{ event.location }}</span>
         <span class="ms-2">{{ event.startDate }}</span>
-        <span class="ms-2 me-2 text-primary text-end"
+        <span class="ms-2 me-2 text-danger fw-bold text-end"
           >{{ event.capacity }}
           <span class="text-shadow">spots left</span></span
         >

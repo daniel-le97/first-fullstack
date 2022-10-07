@@ -28,64 +28,76 @@
             <div class="row">
               <div class="col-6">
                 <div class="">
-                  <label for="coverImg">send a picture!</label>
+                  <label for="coverImg">Send a picture!</label>
                   <input
                     type="text"
                     v-model="editable.coverImg"
                     class="form-control"
                     name="coverImg"
+                    required
                   />
                 </div>
                 <div class="">
-                  <label for="name">what is your event</label>
+                  <label for="name">Event Name?</label>
                   <input
                     type="text"
                     v-model="editable.name"
                     class="form-control"
                     name="name"
+                    required
                   />
                 </div>
                 <div class="">
-                  <label for="description">what is your event about</label>
+                  <label for="description">What is your event about</label>
                   <input
                     type="text"
                     v-model="editable.description"
                     class="form-control"
                     name="description"
+                    required
+                    aria-label="description-input"
                   />
                 </div>
                 <div class="">
-                  <label for="location">where is your event</label>
+                  <label for="location">Where is your event</label>
                   <input
                     type="text"
                     v-model="editable.location"
                     class="form-control"
                     name="location"
+                    required
+                    aria-label="location-input"
                   />
                 </div>
                 <div class="">
-                  <label for="capacity">how many people can you have</label>
+                  <label for="capacity">How many people can you have</label>
                   <input
                     type="number"
                     v-model="editable.capacity"
                     class="form-control"
                     name="capacity"
+                    required
+                    aria-label="capacity-input"
                   />
                 </div>
                 <div class="">
-                  <label for="startDate">when is your event</label>
+                  <label for="startDate">When is your event</label>
                   <input
                     type="datetime-local"
                     v-model="editable.startDate"
                     class="form-control"
                     name="startDate"
+                    required
+                    aria-label="startDate-input"
                   />
                 </div>
                 <div class="mt-2">
                   <select
                     class="form-select bg-white"
-                    aria-label="Default select example"
+                    aria-label="type-input"
                     v-model="editable.type"
+                    required
+                    
                   >
                     <option selected>Event type</option>
                     <option value="expo">expo</option>
@@ -102,6 +114,7 @@
                 <div v-if="editable.coverImg">
                   <div class="mt-3 border-1 border elevation-5">
                     <img
+                    required
                       :src="editable.coverImg"
                       alt=""
                       class="img-fluid rounded"
@@ -126,10 +139,18 @@
               type="button"
               class="btn btn-secondary"
               data-bs-dismiss="modal"
+              aria-label="modal-close"
             >
               Close
             </button>
-            <button type="submit" class="btn btn-primary">Create Event!</button>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              aria-label="submit-event"
+             data-bs-dismiss="modal"
+            >
+              Create Event!
+            </button>
           </div>
         </div>
       </div>
@@ -149,11 +170,8 @@ export default {
       editable,
       async createEvent() {
         try {
-          const yes = await Pop.confirm();
-          if (!yes) {
-            return;
-          }
           await eventsService.createEvent(editable.value);
+          Pop.success('Event created!');
         } catch (error) {
           Pop.error(error);
         }

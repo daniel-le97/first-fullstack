@@ -64,7 +64,7 @@ class EventsService {
     AppState.myTickets.push(res.data);
     AppState.attendees.push(new Attendee(res.data));
     console.log(AppState.attendees);
-    AppState.activeEvent.capacity--;
+    // AppState.activeEvent.capacity--;
   }
   async removeTicket(ticketId) {
     const res = await api.delete(`/api/tickets/${ticketId}`);

@@ -3,21 +3,26 @@
     <div class="row">
       <div class="col-12">
         <div class="text-light">my Events</div>
-        <div class="row">
-          <div class="col-md-3 mt-4" v-for="e in myEvents" :key="e.id">
+        <div class="row" v-if="myEvents">
+          <div class="col-md-3 mt-4 hover-effect" v-for="e in myEvents" :key="e.id">
             <div class="p-1 bg-dark lighten-25 rounded">
               <EventsCard :event="e" />
             </div>
           </div>
         </div>
+        <div class="row" v-else>
+          <div class="col-12">
+            <span class="text-shadow">You have not created any events</span>
+          </div>
+        </div>
       </div>
     </div>
     <div class="row">
-      <div class="col-12" >
+      <div class="col-12">
         <div class="text-light">My tickets</div>
-        <div class="mx-5 px-5" v-for=" t in myTickets" >
+        <div class="mx-5 px-5" v-for="t in myTickets">
           <div class="my-5">
-            <EventDetails :event="t.event"/>
+            <EventDetails :event="t.event" />
           </div>
         </div>
         <!-- <div v-for="t in myTickets" :key="t.id" class="mx-5 px-5">
@@ -74,5 +79,19 @@ export default {
 <style scoped>
 img {
   max-width: 100px;
+}
+
+.text-shadow {
+  color: aliceblue;
+  text-shadow: 1px 1px black, 0px 0px 5px salmon;
+  font-weight: bold;
+  letter-spacing: 0.08rem;
+
+  /* Second Color  in text-shadow is the blur */
+}
+
+.hover-effect:hover {
+  transform: scale(.85)
+  
 }
 </style>

@@ -21,7 +21,7 @@
         class="col-md-8 text-shadow d-flex flex-column justify-content-between"
       >
         <!--  -->
-        <div class="d-flex justify-content-end mt-1" v-if="!routeA">
+        <div class="d-flex justify-content-end mt-1" v-if="!routeAccount">
           <button
             class="btn btn-primary"
             @click="cancelEvent(event.id)"
@@ -41,19 +41,28 @@
           <span>{{ event.location }}</span>
           <span>{{ event.time }}</span>
         </div>
-        <p v-if="!event.isCanceled">{{ event.description }}</p>
-        <div v-else>
-          <p class="fs-1 text-danger">
+        <div v-if="!routeAccount">
+
+          <p
+            v-if="event.isCanceled || event.capacity <= 0"
+            class="fs-1 text-danger"
+          >
             This Event has been canceled or sold out
           </p>
+          <div v-else>
+            <p>
+              {{ event.description }}
+            </p>
+          </div>
         </div>
-        <div class="d-flex justify-content-between mb-3 me-2">
-          <div class="d-flex gap-3 align-items-end">
+        <div class="d-flex  mb-3 me-2"
+        :class="routeAccount? 'justify-content-end': 'justify-content-between'">
+          <div class="d-flex gap-3 align-items-end" v-if="!routeAccount">
             <span class="text-warning">{{ event.capacity }}</span>
             <span>spots left</span>
           </div>
-          <div >
-            <div v-if="!event.isCanceled">
+          <div>
+            <div v-if="!routeAccount">
               <button
                 class="btn btn-danger"
                 @click="removeTicket(event.id)"
@@ -69,6 +78,13 @@
                 Attend
                 <i class="mdi mdi-account-plus"></i>
               </button>
+            </div>
+            <div v-else class="d-flex justify-content-end">
+              <router-link :to="{ name: 'Event', params: { id: event.id } }">
+               <div class="text-shadow  btn btn-danger">
+                go to event page
+               </div>
+              </router-link>
             </div>
           </div>
         </div>
@@ -97,7 +113,7 @@ export default {
     const route = useRoute();
     const editable = ref({});
     return {
-      routeA: computed(() => route.name == "Account"),
+      routeAccount: computed(() => route.name == "Account"),
       // thisTicket: computed(() =>
       //   AppState.myTickets.find((t) => t.eventId == this.event.id)
       // ),
@@ -115,27 +131,36 @@ export default {
           editable.value.eventId = id;
           editable.value.accountId = AppState.account.id;
           console.log(editable.value);
-          await eventsService.createTicket(editable.value)
-          // props.event.capacity;
+          await eventsService.createTicket(editable.value);
+          props.event.capacity--;
+          Pop.success("Attending event!");
         } catch (error) {
           Pop.error(error, "[createTicket]");
         }
       },
       async removeTicket(eventId) {
         try {
+          const yes = await Pop.confirm();
+          if (!yes) {
+            return;
+          }
           let ticket = AppState.myTickets.find(
             (t) => t.profile.id == AppState.account.id
           );
           // console.log(ticket);
           let id = ticket.id;
           await eventsService.removeTicket(id);
-          props.event.capacity++
+          props.event.capacity++;
         } catch (error) {
           Pop.error(error);
         }
       },
       async cancelEvent(eventId) {
         try {
+          const yes = await Pop.confirm();
+          if (!yes) {
+            return;
+          }
           // let event = AppState.events.find(
           //   (e) => e.creatorId == AppState.account.id
           // );
@@ -169,5 +194,14 @@ export default {
   /* Note: backdrop-filter has minimal browser support */
 
   border-radius: 3px;
+}
+
+.text-shadow{
+  color: aliceblue;
+  text-shadow: 2px 2px black, 0px 0px 5px rgb(217, 229, 229);
+  font-weight: bold;
+  letter-spacing: 0.08rem
+  
+  /* Second Color  in text-shadow is the blur */
 }
 </style>
