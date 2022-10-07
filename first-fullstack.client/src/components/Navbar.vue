@@ -50,7 +50,8 @@
     </div>
   </span>
  </div>
-    <div class="mt-2 mt-md-0 d-flex justify-content-center align-items-center">
+    <div class="mt-2 mt-md-0 d-flex justify-content-center align-items-center"
+      :class="account.id? '': 'd-none'">
       <button
         type="button"
         class="btn btn-primary mt-sm-2 mt-0 hover"

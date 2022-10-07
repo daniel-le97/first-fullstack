@@ -14,7 +14,12 @@
         </button>
       </div> -->
       <div class="col-md-4 py-3">
-        <img :src="event.coverImg" :alt="event.name" :title="event.name" class="img-fluid h-100" />
+        <img
+          :src="event.coverImg"
+          :alt="event.name"
+          :title="event.name"
+          class="img-fluid h-100"
+        />
         <!--  -->
       </div>
       <div
@@ -43,7 +48,6 @@
           <span>{{ event.time }}</span>
         </div>
         <div v-if="!routeAccount">
-
           <p
             v-if="event.isCanceled || event.capacity <= 0"
             class="fs-1 text-danger"
@@ -56,14 +60,18 @@
             </p>
           </div>
         </div>
-        <div class="d-flex  mb-3 me-2"
-        :class="routeAccount? 'justify-content-end': 'justify-content-between'">
+        <div
+          class="d-flex mb-3 me-2"
+          :class="
+            routeAccount ? 'justify-content-end' : 'justify-content-between'
+          "
+        >
           <div class="d-flex gap-3 align-items-end" v-if="!routeAccount">
             <span class="text-warning">{{ event.capacity }}</span>
             <span>spots left</span>
           </div>
           <div>
-            <div v-if="!routeAccount">
+            <div v-if="!routeAccount && account.id">
               <button
                 class="btn btn-danger"
                 @click="removeTicket(event.id)"
@@ -82,11 +90,16 @@
                 <i class="mdi mdi-account-plus"></i>
               </button>
             </div>
-            <div v-else class="d-flex justify-content-end">
-              <router-link :to="{ name: 'Event', params: { id: event.id } }" aria-label="event-page-button">
-               <div class="text-shadow  btn btn-danger">
-                go to event page
-               </div>
+            <div
+              v-else
+              class="d-flex justify-content-end"
+              :class="account.id ? '' : 'd-none'"
+            >
+              <router-link
+                :to="{ name: 'Event', params: { id: event.id } }"
+                aria-label="event-page-button"
+              >
+                <div class="text-shadow btn btn-danger">go to event page</div>
               </router-link>
             </div>
           </div>
@@ -199,12 +212,12 @@ export default {
   border-radius: 3px;
 }
 
-.text-shadow{
+.text-shadow {
   color: aliceblue;
   text-shadow: 2px 2px black, 0px 0px 5px rgb(217, 229, 229);
   font-weight: bold;
-  letter-spacing: 0.08rem
-  
+  letter-spacing: 0.08rem;
+
   /* Second Color  in text-shadow is the blur */
 }
 </style>
