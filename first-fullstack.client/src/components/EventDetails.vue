@@ -1,6 +1,18 @@
 <template>
   <div class="event-details container" v-if="event">
     <div class="row blur">
+      <div
+        class="d-flex justify-content-end mt-1"
+        v-if="account?.id == event?.creator.id"
+      >
+        <button
+          class="btn btn-primary"
+          @click="cancelEvent(event.id)"
+          v-if="!event.isCanceled"
+        >
+          cancel event?
+        </button>
+      </div>
       <div class="col-4 py-3">
         <img :src="event.coverImg" alt="" class="img-fluid h-100" />
         <!--  -->
@@ -16,16 +28,33 @@
           <span>{{ event.location }}</span>
           <span>{{ event.time }}</span>
         </div>
-        <p v-if="event.description">{{ event.description }}</p>
+        <p v-if="!event.isCanceled">{{ event.description }}</p>
+        <div v-else>
+          <p class="fs-1 text-danger">This Event has been Canceled, sorry!</p>
+        </div>
         <div class="d-flex justify-content-between mb-3 me-2">
           <div class="d-flex gap-3 align-items-end">
             <span class="text-primary">{{ event.capacity }}</span>
             <span>spots left</span>
           </div>
-          <button class="btn btn-warning" @click="createTicket()">
-            Attend
-            <i class="mdi mdi-account-plus"></i>
-          </button>
+
+          <div v-if="!event.isCanceled">
+            <button
+              class="btn btn-danger"
+              @click="removeTicket(event.id)"
+              v-if="hasTicket"
+            >
+              remove <i class="mdi mdi-account-minus"></i>
+            </button>
+            <button
+              class="btn btn-warning"
+              @click="createTicket(event.id)"
+              v-else
+            >
+              Attend
+              <i class="mdi mdi-account-plus"></i>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -52,20 +81,43 @@ export default {
     const route = useRoute();
     const editable = ref({});
     return {
+      // thisTicket: computed(() =>
+      //   AppState.myTickets.find((t) => t.eventId == this.event.id)
+      // ),
+      hasTicket: computed(() =>
+        AppState.attendees.find((a) => a.id == AppState.account.id)
+      ),
       account: computed(() => AppState.account),
       editable,
 
-      async createTicket() {
+      async createTicket(id) {
         try {
           if (!AppState.account.id) {
             return AuthService.loginWithPopup();
           }
-          editable.value.eventId = route.params.id;
+          editable.value.eventId = id;
           editable.value.accountId = AppState.account.id;
           console.log(editable.value);
           await eventsService.createTicket(editable.value);
         } catch (error) {
           Pop.error(error, "[createTicket]");
+        }
+      },
+      async removeTicket(eventId) {
+        try {
+          let ticket = AppState.myTickets.find((t) => t.eventId == eventId);
+          // console.log(ticket);
+          let id = ticket.id;
+          await eventsService.removeTicket(id);
+        } catch (error) {
+          Pop.error(error);
+        }
+      },
+      async cancelEvent(eventId) {
+        try {
+          await eventsService.cancelEvent(eventId);
+        } catch (error) {
+          Pop.error(error);
         }
       },
     };

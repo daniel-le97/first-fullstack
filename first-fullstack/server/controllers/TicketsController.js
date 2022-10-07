@@ -28,7 +28,7 @@ export class TicketsController extends BaseController {
         req.params.ticketId,
         req.userInfo.id
       );
-      res.send("ticket deleted");
+      res.send(ticket);
     } catch (error) {
       next(error);
     }

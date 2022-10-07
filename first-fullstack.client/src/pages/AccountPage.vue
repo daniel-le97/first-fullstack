@@ -42,9 +42,17 @@ export default {
         Pop.error(error, "[getMyTickets]");
       }
     }
-    
+    async function getMyEvents() {
+      try {
+        await eventsService.getAllEvents();
+      } catch (error) {
+        Pop.error(error);
+      }
+    }
+
     onMounted(() => {
       getMyTickets();
+      getMyEvents();
     });
     return {
       account: computed(() => AppState.account),

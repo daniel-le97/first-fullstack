@@ -6,30 +6,31 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-12 d-flex flex-wrap bg-dark lighten-25 rounded my-4 " v-if="attendees">
-        <div class="min-height">
-
-
-
-          <img
-            :src="attendees.picture"
-            alt="attendee.profile.name"
-            width="45px"
-            height="45px"
-            class="rounded"
-            @error="newImage"
-            v-for="a in attendees"
-            :key="a.id"
-            :attendees="a"
-          />
+      <div
+        class="col-12 d-flex flex-wrap bg-dark lighten-25 rounded my-4"
+        v-if="attendees"
+      >
+        <div class="row flex-wrap">
+          <!-- <div class="col-1" v-for="a in attendees" :key="a.id">
+            <EventAttendees :attendee="a" />
+          </div> -->
         </div>
-       
       </div>
     </div>
     <div class="row justify-content-center">
       <div class="col-10 bg-dark lighten-25 rounded">
         <!--  -->
-        <Comments />
+        <div v-if="!event?.isCanceled">
+
+          <Comments />
+        </div>
+        <div v-else>
+           <router-link class="navbar-brand d-flex justify-content-center" :to="{ name: 'Home' }">
+      <div class="d-flex flex-column align-items-center justify-content-center">
+        <span class="fs-1">find a new event</span>
+      </div>
+    </router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -52,7 +53,7 @@ export default {
         await eventsService.getEventById(route.params.id);
         document.documentElement.scrollTop = 0;
       } catch (error) {
-        Pop.error(error,'[getEventById]');
+        Pop.error(error, "[getEventById]");
       }
     }
     async function getEventTickets() {
@@ -88,7 +89,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.min-height{
+.min-height {
   min-height: 10vh;
 }
 </style>

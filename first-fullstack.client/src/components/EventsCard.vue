@@ -4,7 +4,10 @@
       class="event-card d-flex align-items-end"
       :style="{ backgroundImage: `url(${event.coverImg})` }"
     >
-      <div class="event-details text-shadow d-flex flex-column w-100">
+      <div
+        class="event-details text-shadow d-flex flex-column w-100"
+        v-if="!event.isCanceled"
+      >
         <span class="ms-2">{{ event.name }}</span>
         <span class="ms-2">{{ event.location }}</span>
         <span class="ms-2">{{ event.startDate }}</span>
@@ -13,6 +16,9 @@
           <span class="text-shadow">spots left</span></span
         >
         <span>{{ event.type }}</span>
+      </div>
+      <div v-else class="event-details text-shadow d-flex flex-column w-100">
+        canceled
       </div>
       <!--  -->
     </div>

@@ -25,7 +25,7 @@ export class Event {
     });
 
     this.description = data.description;
-    this.isCanceled = data.isCanceled;
+    this.isCanceled = data.isCanceled || false
     this.capacity = data.capacity;
   }
 }
