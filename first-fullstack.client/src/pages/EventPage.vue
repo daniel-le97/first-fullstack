@@ -10,7 +10,7 @@
         class="col-12 d-flex flex-wrap bg-dark lighten-25 rounded my-4"
         v-if="attendees"
       >
-        <div class="row flex-wrap" v-if="attendees">
+        <div class="row flex-wrap justify-content-between" v-if="attendees">
           <div class="col-3 p-1" v-for="a in attendees" :key="a.id">
             <EventAttendees :attendee="a" />
           </div>

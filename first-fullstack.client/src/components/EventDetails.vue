@@ -17,13 +17,15 @@
         <img :src="event.coverImg" alt="" class="img-fluid h-100" />
         <!--  -->
       </div>
-      <div class="col-md-8 text-shadow d-flex flex-column justify-content-between">
+      <div
+        class="col-md-8 text-shadow d-flex flex-column justify-content-between"
+      >
         <!--  -->
         <div class="d-flex justify-content-end mt-1">
           <button
             class="btn btn-primary"
             @click="cancelEvent(event.id)"
-            v-if="!event.isCanceled"
+            v-if="event.creator?.id == account?.id && !event?.isCanceled"
           >
             cancel event?
           </button>
@@ -86,9 +88,9 @@ import Pop from "../utils/Pop.js";
 
 export default {
   props: {
-    event: { required: false },
+    event: { type: Event, required: true },
   },
-  setup() {
+  setup(props) {
     const route = useRoute();
     const editable = ref({});
     return {

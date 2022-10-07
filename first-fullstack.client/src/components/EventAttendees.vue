@@ -1,6 +1,10 @@
 <template>
   <div class="event-attendee">
-    <img :src="attendee.profile.picture" :alt="attendee.name" class="rounded img-fluid" />
+    <img
+      :src="attendee.profile.picture"
+      :alt="attendee.name"
+      class="rounded Images"
+    />
   </div>
 </template>
 
@@ -17,4 +21,10 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.Images {
+  height: 2rem;
+  width: 2rem;
+  object-fit: cover;
+}
+</style>
