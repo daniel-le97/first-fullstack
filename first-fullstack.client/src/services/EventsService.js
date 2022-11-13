@@ -25,14 +25,14 @@ class EventsService {
   }
   async getEventById(eventId) {
     const res = await api.get(`/api/events/${eventId}`)
-    console.log(res.data);
+    // console.log(res.data);
     AppState.activeEvent = new Event(res.data);
   }
   async getEventTickets(eventId) {
     const res = await api.get(`/api/events/${eventId}/tickets`);
-    console.log(res.data);
+    // console.log(res.data);
     AppState.attendees = res.data.map((e) => new Attendee(e));
-    console.log(AppState.attendees);
+    // console.log(AppState.attendees);
   }
   async getEventComments(eventId) {
     const res = await api.get(`/api/events/${eventId}/comments`);
@@ -48,27 +48,27 @@ class EventsService {
 
   async getMyTickets() {
     const res = await api.get("/account/tickets");
-    console.log(res.data);
+    // console.log(res.data);
     AppState.myTickets = res.data.map(t => new Ticket(t))
     
     // let tickets = res.data.map((t) => new Ticket(t));
     // console.log(tickets);
     // AppState.myTickets = res.data;
 
-    console.log(AppState.myTickets);
+    // console.log(AppState.myTickets);
   }
   async createTicket(ticketData) {
-    console.log(ticketData);
+    // console.log(ticketData);
     const res = await api.post("/api/tickets", ticketData);
-    console.log(res.data);
+    // console.log(res.data);
     AppState.myTickets.push(res.data);
     AppState.attendees.push(new Attendee(res.data));
-    console.log(AppState.attendees);
+    // console.log(AppState.attendees);
     // AppState.activeEvent.capacity--;
   }
   async removeTicket(ticketId) {
     const res = await api.delete(`/api/tickets/${ticketId}`);
-    console.log(res.data);
+    // console.log(res.data);
 
     AppState.myTickets = AppState.myTickets.filter((t) => t.id != ticketId);
     AppState.attendees = AppState.attendees.filter(
@@ -90,14 +90,14 @@ class EventsService {
     // console.log(eventData);
     const res = await api.post("/api/events", eventData);
     let event = new Event(res.data);
-    console.log(event.id);
+    // console.log(event.id);
     AppState.events = [event, ...AppState.events];
     AppState.activeEvent = event;
     router.push({ name: "Event", params: { id: event.id } });
   }
   async cancelEvent(eventId) {
     const res = await api.delete(`/api/events/${eventId}`);
-    console.log(res.data);
+    // console.log(res.data);
     // let event = AppState.events.find((e) => e.id == eventId);
     // console.log(event);
     // event.isCanceled = true;

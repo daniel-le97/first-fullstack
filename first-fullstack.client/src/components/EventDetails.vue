@@ -146,7 +146,7 @@ export default {
           }
           editable.value.eventId = id;
           editable.value.accountId = AppState.account.id;
-          console.log(editable.value);
+          // console.log(editable.value);
           await eventsService.createTicket(editable.value);
           props.event.capacity--;
           Pop.success("Attending event!");
