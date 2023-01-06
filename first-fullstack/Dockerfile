@@ -1,4 +1,4 @@
-FROM node:16-alpine AS build-env
+FROM node:19.0.0-alpine3.16 AS build-env
 
 WORKDIR /app
 # replace with your projects name
