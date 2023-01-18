@@ -3,7 +3,6 @@ ENV NODE_ENV=production
 WORKDIR /app
 COPY ./package*.json ./
 RUN npm install
-RUN ls
 COPY ./ ./
 ENV PORT=80
 EXPOSE 80
